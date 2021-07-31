@@ -1,0 +1,19 @@
+## Interface: 20501
+
+## Title: girls only Master Loot
+## Notes: A master loot helper for <girls only> of Mankirk Horde
+
+## Author: praxxis
+
+## Version: 0.1
+
+## X-Category: TODO
+## X-Website: TODO
+## X-License: TODO
+## X-Curse-Project-ID: TODO
+
+## SavedVariables: GOMLDB
+
+
+libs\files.xml
+files.xml
