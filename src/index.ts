@@ -6,9 +6,13 @@ import { _G } from "@wowts/wow-mock";
 
 const Base = NewAddon("girlsonlyMasterLoot", aceConsole, aceEvent);
 
+const _GetNumLootItems = _G["GetNumLootItems"] as typeof GetNumLootItems;
+
 class GOML extends Base {
     OnInitialize() {
-        debug("Test from GOML!!");
+        this.RegisterEvent("LOOT_OPENED", () => {
+            debug(_GetNumLootItems());
+        });
     }
 }
 
