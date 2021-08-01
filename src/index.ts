@@ -3,13 +3,14 @@ import aceEvent from "@wowts/ace_event-3.0";
 import aceConsole from "@wowts/ace_console-3.0";
 // import aceGui, { AceGUIWidgetBase } from "@wowts/ace_gui-3.0";
 import { debug } from "./util";
-import { _G, CreateFrame, UIParent } from "@wowts/wow-mock";
+import { _G, CreateFrame, UIParent, FakeFrame } from "@wowts/wow-mock";
 import aceDb, { AceDatabase } from "@wowts/ace_db-3.0";
 
 const Base = NewAddon("girlsonlyMasterLoot", aceConsole, aceEvent);
 
 const _GetNumLootItems = _G["GetNumLootItems"] as typeof GetNumLootItems;
 const _LibStub = _G["LibStub"];
+const _BackdropTemplateMixin = _G["BackdropTemplateMixin"];
 
 // class AceGUIFrame extends AceGUIWidgetBase {
 //     SetTitle(title: string) {}
@@ -31,6 +32,11 @@ interface GOMLDB {
     };
 }
 
+class ExtendedUIFrame extends FakeFrame {
+    SetBackdrop(options: any) {}
+    SetBackdropColor(r: number, g: number, b: number) {}
+}
+
 class GOML extends Base {
     db!: AceDatabase & GOMLDB;
 
@@ -46,9 +52,18 @@ class GOML extends Base {
     }
 
     createFrame = () => {
-        const f = CreateFrame("Frame", "GOMLFrame", UIParent);
+        const f = CreateFrame(
+            "Frame",
+            "GOMLFrame",
+            UIParent,
+            _BackdropTemplateMixin && "BackdropTemplate",
+        ) as unknown as ExtendedUIFrame;
         f.SetHeight(100);
         f.SetWidth(100);
+
+        f.SetBackdrop({ bgFile: "Interface/Tooltips/UI-Tooltip-Background" });
+        f.SetBackdropColor(1, 0, 0);
+        f.EnableMouse(true);
 
         // const f2 = aceGui.Create("Frame" as any) as any as AceGUIFrame;
         // f2.SetTitle("test");
