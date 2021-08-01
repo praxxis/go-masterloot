@@ -13,7 +13,7 @@
     },
     "scripts": {
         "test": "jest",
-        "build": "tstolua -p tsconfig.lua.json && cp -R static/* dist/",
+        "build": "tstolua -p tsconfig.lua.json && shx cp -R static/* dist/",
         "watch": "tstolua -p tsconfig.lua.json -w",
         "lint": "eslint src --ext .ts",
         "prettier": "prettier --write src"
@@ -45,6 +45,7 @@
         "eslint": "^7.32.0",
         "jest": "^27.0.6",
         "prettier": "^2.3.2",
+        "shx": "^0.3.3",
         "ts-jest": "^27.0.4"
     },
     "repository": {
