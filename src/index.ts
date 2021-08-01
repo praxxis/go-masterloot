@@ -7,7 +7,7 @@ const Base = NewAddon("girls only Master Loot", aceConsole, aceEvent);
 
 class GOML extends Base {
     OnInitialize() {
-        debug("Test from GOML!");
+        debug("Test from GOML!!");
     }
 }
 
